@@ -11,7 +11,7 @@ const optiondDB = {
   useNewUrlParser: true
 };
 
-const PORT = 3001;
+const PORT = 3000;
 const client = mongodb.MongoClient;
 
 var dbo;
