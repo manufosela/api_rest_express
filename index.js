@@ -41,6 +41,7 @@ app.get('/misdatos', function(req, res) {
 });
 
 app.post('/uploadfile', function(req, res) {
+  console.log("Llamada a /uploadfile " + new Date());
   if (Object.keys(req.files).length === 0) {
     return res.status(400).send('No files were uploaded.');
   }
