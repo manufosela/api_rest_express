@@ -41,8 +41,7 @@ app.get('/pokedex', function(req, res) {
 });
 
 app.delete('/pokedex/:id', function(req, res) {
-  var myquery = {id:req.params.id};
-  dbo.collection('pokedex').deleteOne(myquery, function(err, obj) {
+  dbo.collection('pokedex').remove({id:req.params.id}, function(err, obj) {
     if (err) {
       throw err;
     }
