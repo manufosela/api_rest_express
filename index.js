@@ -5,7 +5,7 @@ const mongodb = require('mongodb');
 const uploadFile = require('./uploadfile.js').uploadFile;
 
 const config = {
-  DB: 'mongodb://mongo:27017'
+  DB: 'mongodb://localhost:27017'
 };
 const optiondDB = {
   useNewUrlParser: true
