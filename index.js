@@ -41,14 +41,20 @@ app.get('/pokedex', function(req, res) {
 });
 
 app.delete('/pokedex/:id', function(req, res) {
-  let data = dbo.collection('pokedex').update({}, {$unset: {id:req.params.id}}, false, true).toArray((err, result) => {
-    if (err) {
-      throw err;
+  db.collection('pokedex').findAndModify(
+    {id:req.params.id}, // query
+    [['_id','asc']],  // sort order
+    {$set: {}}, // delete
+    {}, // options
+    function(err, object) {
+      if (err){
+        console.warn(err.message);  // returns error if no matching object found
+      }else{
+        console.dir(object);
+      }
     }
-    res.json(result);
-  });
+  );
 });
-
 
 app.listen(PORT, function() {
   console.log('Your node js server is running on PORT:', PORT);
