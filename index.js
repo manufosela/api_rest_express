@@ -40,28 +40,15 @@ app.get('/pokedex', function(req, res) {
   });
 });
 
-app.post('/uploadfile', function(req, res) {
-  console.log("Llamada a /uploadfile " + new Date());
-  if (Object.keys(req.files).length === 0) {
-    return res.status(400).send('No files were uploaded.');
-  }
-
-  let newFile = req.files.newfile;
-
-  async function result(newFile) {
-    let result = await uploadFile(newFile);
-    return result;
-  };
-
-  result(newFile).then(result => {
-    console.log(result);
-    res.send('File ' + newFile.name + '(' + newFile.data.length / 1024 + 'Kb) uploaded!');
-    dbo.collection('micoleccion').insert({titulo: newFile.name})
-  }).catch(err => {
-    console.log(err);
-    return res.status(500).send('upload error');
+app.delete('/pokedex/:id', function(req, res) {
+  let data = dbo.collection('pokedex').update({}, {$unset: {id:req.params.id}}, false, true).toArray((err, result) => {
+    if (err) {
+      throw err;
+    }
+    res.json(result);
   });
 });
+
 
 app.listen(PORT, function() {
   console.log('Your node js server is running on PORT:', PORT);
