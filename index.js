@@ -41,7 +41,7 @@ app.get('/pokedex', function(req, res) {
 });
 
 app.delete('/pokedex/:id', function(req, res) {
-  db.collection('pokedex').findAndModify(
+  dbo.collection('pokedex').findAndModify(
     {id:req.params.id}, // query
     [['_id','asc']],  // sort order
     {$set: {}}, // delete
