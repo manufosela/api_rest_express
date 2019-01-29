@@ -41,13 +41,20 @@ app.get('/pokedex', function(req, res) {
 });
 
 app.delete('/pokedex/:id', function(req, res) {
-  dbo.collection('pokedex').deleteOne({id:req.params.id}, function(err, obj) {
+  dbo.collection('pokedex').find({id:req.params.id}).toArray((err, result) => {
     if (err) {
       throw err;
     }
-    console.log("document with id " + req.params.id + "deleted");
-    res.json(obj);
-  });
+    console.log(_result._id);
+    dbo.collection('pokedex').deleteOne({_id:result._id}, function(err, obj) {
+      if (err) {
+        throw err;
+      }
+      console.log("document with id " + req.params.id + " deleted");
+      res.json(obj);
+    });
+  })
+
 });
 
 app.listen(PORT, function() {
