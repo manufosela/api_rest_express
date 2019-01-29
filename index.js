@@ -31,8 +31,8 @@ app.get('/', function(req, res) {
   res.json({"hello": "express with mongo"});
 });
 
-app.get('/misdatos', function(req, res) {
-  let data = dbo.collection('micoleccion').find({}).toArray((err, result) => {
+app.get('/pokedex', function(req, res) {
+  let data = dbo.collection('pokedex').find({}).toArray((err, result) => {
     if (err) {
       throw err;
     }
