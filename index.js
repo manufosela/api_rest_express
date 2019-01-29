@@ -45,7 +45,7 @@ app.delete('/pokedex/:id', function(req, res) {
     if (err) {
       throw err;
     }
-    console.log(_result._id);
+    console.log(result);
     dbo.collection('pokedex').deleteOne({_id:result._id}, function(err, obj) {
       if (err) {
         throw err;
